@@ -6,20 +6,6 @@
         <a href="/" class="avatar"></a>
       </header>
     </nav>
-    <!-- <swipe :auto="2000"> -->
-      <!-- <swipe-item>
-        <img src="http://www.zwdu.com/files/article/image/8/8634/8634s.jpg">
-      </swipe-item>
-      <swipe-item>
-        <img src="http://www.zwdu.com/files/article/image/7/7718/7718s.jpg">
-      </swipe-item>
-      <swipe-item>
-        <img src="http://www.zwdu.com/files/article/image/22/22104/22104s.jpg">
-      </swipe-item> -->
-<!--       <swipe-item v-for="item in arr">
-        <img :src="item.fmimg">
-      </swipe-item> -->
-   <!--  </swipe> -->
     <p>玄幻</p>
     <ul class="listPanel clearfix" v-show="isLoading">
       <li v-for="item in arr" @click="toLookDetail(item.id)">
@@ -84,6 +70,9 @@
       },
       toLookDetail (id) {
         console.log(id)
+        console.log(this.$Api)
+        this.$router.push({name: 'Detail', params: {id: id}})
+        this.$router.go('/detail')
       }
     },
     components: {

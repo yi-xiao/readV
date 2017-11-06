@@ -17,6 +17,7 @@ Vue.use(MintUi)
 new Vue({
   el: '#app',
   router,
+  Api,
   store,
   template: '<App/>',
   components: { App }
