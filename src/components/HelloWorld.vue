@@ -69,10 +69,7 @@
         })
       },
       toLookDetail (id) {
-        console.log(id)
-        console.log(this.$Api)
         this.$router.push({name: 'Detail', params: {id: id}})
-        this.$router.go('/detail')
       }
     },
     components: {
@@ -82,7 +79,7 @@
   }
 </script>
 
-<style lang="less" type="text/less">
+<style lang="less" type="text/less" scoped>
   .container{
     position: relative;
   }
