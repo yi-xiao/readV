@@ -6,7 +6,7 @@ import router from './router'
 import store from './store/index'
 import MintUi from 'mint-ui'
 import 'mint-ui/lib/style.css'
-import './assets/css/reset.css'
+import '../static/reset.css'
 import Api from './assets/js/api'
 
 Vue.use(Api)

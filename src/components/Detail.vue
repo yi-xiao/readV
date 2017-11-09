@@ -2,9 +2,13 @@
     <div>
         <header>
             <div>
-                <router-link to="/"> > </router-link>
+                <router-link to="/">
+                    <i class="iconfont icon-arrow-back ui-color-fff ui-display-inline-lock ui-float-left"></i>
+                </router-link>
             </div>
-            <div>书架</div>
+            <div class="ui-float-right ui-margin-right-20">书架
+                <i class="iconfont icon-home"></i>
+            </div>
         </header>
         <div class="detail-container">
             <div class="header clearfix">
@@ -39,7 +43,8 @@
     export default {
         data () {
             return {
-                infos: ''
+                infos: '',
+                chrapatar: 1
             }
         },
         created () {
@@ -56,11 +61,7 @@
                 })
             },
             readyRead () {
-                axios.get(`http://localhost:3334/bookread`, {params: {chrapatar: 2}}).then(res => {
-                    let _info = res.data
-                    _info.content = _info.content.replace(/\n/g,"<br>")
-                   console.log(_info)
-                })
+                this.$router.push({name: 'Read', params: {ids: this.$route.params.id}})
             }
         }
     }
@@ -91,10 +92,6 @@
         background: #fff;
         color: #f44336;
     }
-    /*.all:active{*/
-        /*background-color: #3e4347;*/
-    /*}*/
-
 
     header{
         position: fixed;
@@ -102,14 +99,16 @@
         width: 100%;
         color: #fff;
         height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
     }
 
-
     .header{
+        height: 246px;
         padding: 20px 10px 10px;
         color: #fff;
         background: rgba(197, 197, 197, 0.1);
-        background: url("../assets/images/bg.png");
+        background-image: url("../assets/images/bg.png");
         background-position: center;
         background-size: cover;
     }
@@ -149,10 +148,5 @@
     }
     .read-container{
         text-align: center;
-    }
-    .clearfix{
-        content: '';
-        display: block;
-        clear: both;
     }
 </style>

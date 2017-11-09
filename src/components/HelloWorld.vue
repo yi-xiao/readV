@@ -3,7 +3,9 @@
     <nav class="nav-header">
       <header>
         <a href="/" class="brand">书</a>
-        <a href="/" class="avatar"></a>
+        <a href="/" class="avatar">
+            <i class="iconfont icon-logout ui-color-fff ui-display-inline-lock ui-float-left ui-font-24"></i>
+        </a>
       </header>
     </nav>
     <p>玄幻</p>
@@ -99,12 +101,7 @@
         flex: 3;
         text-align: center;
       }
-      .avatar{
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        background: pink;
-      }
+      .avatar{}
     }
   }
   .mint-swipe{
