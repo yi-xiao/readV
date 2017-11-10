@@ -22,7 +22,7 @@
                     <p class="time">{{infos.latest_time}}</p>
                 </div>
             </div>
-            <div class="read-container">
+            <div class="read-btn-container">
                 <button class="read" @click="readyRead">
                     开始阅读
                 </button>
@@ -61,7 +61,7 @@
                 })
             },
             readyRead () {
-                this.$router.push({name: 'Read', params: {ids: this.$route.params.id}})
+                this.$router.push({name: 'Read', params: {ids: this.$route.params.id, id: this.$route.params.id}})
             }
         }
     }
@@ -146,7 +146,7 @@
     .primary{
         padding: 0 10px;
     }
-    .read-container{
+    .read-btn-container{
         text-align: center;
     }
 </style>
