@@ -5,9 +5,9 @@
                 <i  class="iconfont icon-arrow-back ui-display-inline-lock"></i>
             </div>
             <div class="ui-display-inline-block">
-                <p class="ui-display-inline-block ui-text-center ui-position-absolute ui-position-center ui-position-top-0 read-book-name">{{content.bookName}}</p>
+                <p class="ui-display-inline-block ui-text-center ui-position-absolute ui-position-center ui-position-top-0 read-book-name">{{content.title}}</p>
             </div>
-            <div class="ui-float-right ui-margin-right-20">
+            <div class="ui-float-right ui-margin-right-6">
                 <router-link to="/">
                     <i class="iconfont icon-home"></i>
                 </router-link>
@@ -19,8 +19,9 @@
             <button @click="preOne">上一章</button>
             <button @click="nextOne">下一章</button>
         </div>
-        <div class="ui-position-fixed read-position-fixed" @click="backTop">
-            <i class="iconfont icon-body-top read-back-top"></i>
+        <div class="ui-position-fixed read-position-fixed">
+            <i class="iconfont icon-body-top read-back-top read-fast-btn" @click="backTop"></i>
+            <i class="iconfont icon-to-bottom read-to-bottom read-fast-btn " @click="toBottom"></i>
         </div>
     </div>
 </template>
@@ -30,34 +31,40 @@
         data () {
             return {
                 content: '',
-                titles: [],
+                title: '',
                 chrapatar: this.$route.params.ids,
                 id: this.$route.params.id || 1
             }
         },
         created () {
             this.getContents(this.chrapatar)
-            this.getTitles()
+            // this.getTitles()
         },
         methods: {
             getContents() {//章节内容
-                axios.get(`http://localhost:3334/bookread`, {params: {chrapatar: this.chrapatar}}).then(res => {
-                    this.chrapatar++
-                    let _info = res.data
-                    _info.content = _info.content.replace(/-/g,"<br><span></span>")
-                    this.content = _info
+                axios.get(`http://localhost:3334/bookread`, {params: {chrapatar: this.chrapatar, book_id: this.id }}).then(res => {
+                    if(res.data){
+                        this.chrapatar++
+                        let _info = res.data
+                        _info.content = _info.content.replace(/-/g,"<br><span></span>")
+                        this.content = _info
+                    }else{
+                        this.content = {
+                            title: '未完待续',
+                            content: '别再翻了，没有更多内容了。。。'
+                        }
+                    }
                 })
             },
             getTitles() {//所有标题
                 axios.get(`http://localhost:3334/booktitles`, {params: {id: this.id}}).then(res => {
                     let _info = res.data
-                    _info.titles = _info.titles.split('-')
+                    _info.titles = _info.contents
                     this.titles = _info
-                    console.log(this.titles)
+                    console.log(_info)
                 })
             },
             backPre() {//返回上一层
-                console.log('000000')
                 this.$router.go(-1)
             },
             preOne() {
@@ -75,26 +82,34 @@
             },
             backTop() {
                 document.documentElement.scrollTop = document.body.scrollTop = 0
+            },
+            toBottom() {
+                document.documentElement.scrollTop = document.body.scrollHeight
             }
         }
     }
 </script>
 <style type="text/css">
-    .read-back-pre{
+    .read-back-pr{
         margin-left: 6px;
     }
+    .ui-margin-right-6{
+        margin-right: 6px;
+    }
     .read-container{
-        padding: 10px 6px 30px;
         background: #e8dede;
     }
     .read-header{
         width: 100%;
+        height: 30px;
+        line-height: 30px;
+        background: #e8dede;
     }
     .read-book-name{
         z-index: -1;
     }
     .read-content{
-        padding-top: 30px;
+        padding: 30px 6px 30px;
         text-indent: 2em;
         text-align: justify;
     }
@@ -104,22 +119,27 @@
     }
     .read-position-fixed{
         right: 10px;
-        bottom: 10px;
-        border: 1px solid #000;
+        top: 40%;
         width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        line-height: 40px;
-        background-color: #030331;
+        height: 90px;
         text-align: center;
         cursor: pointer;
     }
-    .read-position-fixed:active {
-        background-color: #353579;
-        border-radius: 50%;
-    }
-    .read-back-top{
+    .read-fast-btn{
         font-size: 30px;
         color: #b1b6d0;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        display: block;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,.5);
+        background: rgba(255,255,255,.5);
+    }
+    .read-back-top{
+        
+    }
+    .read-to-bottom{
+        margin-top: 10px;
     }
 </style>

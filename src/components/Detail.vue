@@ -13,7 +13,7 @@
         <div class="detail-container">
             <div class="header clearfix">
                 <div class="header-left">
-                    <img :src="infos.fmimg">
+                    <img :src="infos.headimg">
                 </div>
                 <div class="header-right">
                     <p class="name">{{infos.name}}</p>
@@ -61,7 +61,7 @@
                 })
             },
             readyRead () {
-                this.$router.push({name: 'Read', params: {ids: this.$route.params.id, id: this.$route.params.id}})
+                this.$router.push({name: 'Read', params: {ids: 1, id: this.$route.params.id}})
             }
         }
     }

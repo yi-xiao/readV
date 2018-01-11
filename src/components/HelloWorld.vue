@@ -11,22 +11,22 @@
     <p>玄幻</p>
     <ul class="listPanel clearfix" v-show="isLoading">
       <li v-for="item in arr" @click="toLookDetail(item.id)">
-        <img :src="item.fmimg">
-        <p>{{item.name}}</p>
+        <img :src="item.headimg">
+        <p>{{item.title}}</p>
       </li>
     </ul>
     <p>都市</p>
     <ul class="listPanel clearfix" v-show="isLoading">
       <li v-for="item in arr1" @click="toLookDetail(item.id)">
-        <img :src="item.fmimg">
-        <p>{{item.name}}</p>
+        <img :src="item.headimg">
+        <p>{{item.title}}</p>
       </li>
     </ul>
     <p>言情</p>
     <ul class="listPanel clearfix" v-show="isLoading">
       <li v-for="item in arr2" @click="toLookDetail(item.id)">
-        <img :src="item.fmimg">
-        <p>{{item.name}}</p>
+        <img :src="item.headimg">
+        <p>{{item.title}}</p>
       </li>
     </ul>
   </div>
