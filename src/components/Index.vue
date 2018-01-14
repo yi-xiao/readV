@@ -8,21 +8,29 @@
         </a>
       </header>
     </nav>
-    <p>玄幻</p>
+    <mt-cell title="没有喜欢的内容？试试搜索功能吧！">
+      <mt-button type="primary" plain @click.native="toSearchBook">搜索</mt-button>
+    </mt-cell>
+    
+    <!-- <p>玄幻</p> -->
+    <mt-cell title="玄幻"></mt-cell>
     <ul class="listPanel clearfix" v-show="isLoading">
       <li v-for="item in arr" @click="toLookDetail(item.id)">
         <img :src="item.headimg">
         <p>{{item.title}}</p>
       </li>
     </ul>
-    <p>都市</p>
+    <!-- <p>都市</p> -->
+    <mt-cell title="都市"></mt-cell>
     <ul class="listPanel clearfix" v-show="isLoading">
       <li v-for="item in arr1" @click="toLookDetail(item.id)">
         <img :src="item.headimg">
         <p>{{item.title}}</p>
       </li>
     </ul>
-    <p>言情</p>
+    <!-- <p>言情</p> -->
+
+    <mt-cell title="言情"></mt-cell>
     <ul class="listPanel clearfix" v-show="isLoading">
       <li v-for="item in arr2" @click="toLookDetail(item.id)">
         <img :src="item.headimg">
@@ -34,7 +42,6 @@
 
 <script>
   import axios from 'axios'
-  import { Swipe, SwipeItem } from 'mint-ui'
 
   export default {
     data () {
@@ -43,7 +50,8 @@
         arr: [],
         arr1: [],
         arr2: [],
-        isLoading: false
+        isLoading: false,
+        changeValue: ''
       }
     },
     created () {
@@ -51,7 +59,7 @@
     },
     methods: {
       getData () {
-        axios.get(`http://localhost:3334/booklist`).then(res => {
+        axios.get(`${this.commen.api}/booklist`).then(res => {
           this.booklist = res.data
           this.limitData()
           this.isLoading = true
@@ -59,25 +67,25 @@
       },
       limitData () {
         this.booklist.forEach((item, index) => {
-          if (index < 6) {
+          if (item.type == 1) {
             this.arr.push(item)
           }
-          if (index > 6 && index < 13) {
+          else if (item.type == 2) {
             this.arr1.push(item)
           }
-          if (index > 13 && index < 20) {
+          else {
             this.arr2.push(item)
           }
         })
       },
       toLookDetail (id) {
         this.$router.push({name: 'Detail', params: {id: id}})
+      },
+      toSearchBook () {
+        this.$router.push({name: 'Search'})
       }
     },
-    components: {
-      Swipe,
-      SwipeItem
-    }
+    components: {},
   }
 </script>
 

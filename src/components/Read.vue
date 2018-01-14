@@ -15,14 +15,15 @@
         </header>
         <div class="read-content" v-html="content.content">
         </div>
-        <div class="control-label">
-            <button @click="preOne">上一章</button>
-            <button @click="nextOne">下一章</button>
+        <div class="read-control-label">
+            <mt-button type="default" @click.native="preOne">上一章</mt-button>
+            <mt-button type="default" @click.native="nextOne">下一章</mt-button>
         </div>
         <div class="ui-position-fixed read-position-fixed">
             <i class="iconfont icon-body-top read-back-top read-fast-btn" @click="backTop"></i>
             <i class="iconfont icon-to-bottom read-to-bottom read-fast-btn " @click="toBottom"></i>
         </div>
+        
     </div>
 </template>
 <script>
@@ -42,7 +43,7 @@
         },
         methods: {
             getContents() {//章节内容
-                axios.get(`http://localhost:3334/bookread`, {params: {chrapatar: this.chrapatar, book_id: this.id }}).then(res => {
+                axios.get(`${this.commen.api}/bookread`, {params: {chrapatar: this.chrapatar, book_id: this.id }}).then(res => {
                     if(res.data){
                         this.chrapatar++
                         let _info = res.data
@@ -57,7 +58,7 @@
                 })
             },
             getTitles() {//所有标题
-                axios.get(`http://localhost:3334/booktitles`, {params: {id: this.id}}).then(res => {
+                axios.get(`${this.commen.api}/booktitles`, {params: {id: this.id}}).then(res => {
                     let _info = res.data
                     _info.titles = _info.contents
                     this.titles = _info
@@ -141,5 +142,10 @@
     }
     .read-to-bottom{
         margin-top: 10px;
+    }
+    .read-control-label{
+        text-align: center;
+        height: 100px;
+        line-height: 100px;
     }
 </style>

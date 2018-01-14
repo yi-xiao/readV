@@ -1,3 +1,11 @@
-const api = 'http://localhost:3334'
+// const api = {
+// 	localhost: 'http://localhost:3334'
+// }
 
-export default api
+export default {
+	install(Vue, options) {
+		Vue.prototype.commen = {
+			api: 'http://localhost:3334'
+		};
+	}
+}

@@ -7,9 +7,9 @@ import store from './store/index'
 import MintUi from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import '../static/reset.css'
-import Api from './assets/js/api'
+import Commen from '@/assets/js/api'
 
-Vue.use(Api)
+Vue.use(Commen)
 
 Vue.use(MintUi)
 
@@ -17,7 +17,6 @@ Vue.use(MintUi)
 new Vue({
   el: '#app',
   router,
-  Api,
   store,
   template: '<App/>',
   components: { App }
